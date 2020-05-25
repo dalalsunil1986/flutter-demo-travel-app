@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_ui/models/destination_model.dart';
+import 'package:travel_ui/screens/destination_detail_page.dart';
 
 class DestinationCard extends StatefulWidget {
   DestinationCard({Key key, this.destination}) : super(key: key);
@@ -15,7 +16,12 @@ class _DestinationCardState extends State<DestinationCard> {
   _DestinationCardState(this.destination);
 
   void _goToDestination() {
-    // Navigator.push(context).MaterialPageR
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DestinationDetailPage(
+                  destination: this.destination,
+                )));
   }
 
   @override
@@ -76,14 +82,17 @@ class _DestinationCardState extends State<DestinationCard> {
                         offset: Offset(0, 2),
                         blurRadius: 6)
                   ]),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image(
-                    height: 180,
-                    width: 160,
-                    fit: BoxFit.cover,
-                    image: AssetImage(destination.imageUrl),
-                  )),
+              child: Hero(
+                tag: this.destination.imageUrl,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image(
+                      height: 180,
+                      width: 160,
+                      fit: BoxFit.cover,
+                      image: AssetImage(destination.imageUrl),
+                    )),
+              ),
             ),
           ],
         ),
